@@ -1,11 +1,12 @@
 #-*-coding:utf-8-*-
 import urllib2
 import json
-from city import city  #前一个city是模块 city.
+from city import city  #前一个city是模块 city.py的模块名，
 #后一个city是模块里的变量名
 cityname=raw_input('你想查哪个城市的天气？\n')  #'你想查哪个城市的天气为默认参数'
 citycode=city.get(cityname)
 if citycode:
+    try:
         url=('http://www.weather.com.cn/data/cityinfo/%s.html'%citycode)
         content=urllib2.urlopen(url).read()
         #print type(content),此时content的类型为json字符串
@@ -18,10 +19,10 @@ if citycode:
             result['temp2']
         )
         print str_temp
-
+    except:
+        print'查询失败'
 else:
-        print'没有找到城市'
-
+    print'没有找到城市'
 
 
 
